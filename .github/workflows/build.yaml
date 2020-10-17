@@ -25,8 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Validate docker-compose.yml 
-      run: docker-compose -f docker-compose.yml config
+    - name: Validate docker-compose.yaml 
+      run: docker-compose -f docker-compose.yaml config
 
   build:
     needs: [test]
