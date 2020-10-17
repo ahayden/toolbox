@@ -45,7 +45,7 @@ jobs:
             return repo.data
       -
         name: Versioning logic
-        id: prep_versions
+        id: prep
         run: |
           DOCKER_IMAGE=ahayden/${{ github.event.repository.name }}
           VERSION=noop
