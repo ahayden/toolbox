@@ -94,7 +94,7 @@ jobs:
           file: ./Dockerfile.base
           platforms: linux/amd64,linux/arm64,linux/386
           build-args: |
-            version=${{ steps.vars.outputs.version }}
+            version=${{ steps.prep.outputs.version }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.prep.outputs.tags }}
           labels: |
