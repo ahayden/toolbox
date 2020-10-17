@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  base:
+    image: ahayden/toolbox:base-${version}
+    build:
+      context: .
+      dockerfile: ./Dockerfile.base
+      args:
+        version: ${version}
+    hostname: base
+    extra_hosts:
+      - "base:127.0.0.1"
+    restart: unless-stopped
+    network_mode: host
+    command: /bin/bash
+
+# user:
+#   image: ahayden/toolbox:user-${version}
+#   build:
+#     context: .
+#     dockerfile: ./Dockerfile.user
+#     args:
+#       user: ${user}
+#       version: ${version}
+#   hostname: user
+#   extra_hosts:
+#     - "user:127.0.0.1"
+#   restart: unless-stopped
+#   network_mode: host
+#   volumes:
+#     - home-persist:/home/ahayden/persist
+#   command: /bin/bash
+
+volumes:
+  home-persist:
