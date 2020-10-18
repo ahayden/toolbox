@@ -1,6 +1,6 @@
 ARG source_repo
 ARG version
-FROM ${source_repo}:base-${version}
+FROM ${source_repo}-base:${version}
 
 ARG container_user
 RUN test -n "${container_user}"
@@ -16,7 +16,7 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         openssh-client \
         sudo \
         tmux \
-        vim \
+        neovim \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
