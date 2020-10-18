@@ -11,7 +11,7 @@ jobs:
     container: hadolint/hadolint:latest
     strategy:
       matrix:
-        container: [ 'base', 'user', 'dev' ]
+        container: [ 'base', 'user' ] #skip lint on 'dev' container
     steps:
     - uses: actions/checkout@v2
     - name: Run hadolint
