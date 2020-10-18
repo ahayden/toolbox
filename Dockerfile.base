@@ -7,6 +7,7 @@ RUN test -n "${version}"
 
 ENV version=${version}
 LABEL version=${version}
+LABEL about.license="SPDX:Apache-2.0"
 
 # Install dependencies
 # hadolint ignore=DL3008
