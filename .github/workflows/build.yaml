@@ -53,15 +53,16 @@ jobs:
         id: prep
         run: |
           DOCKER_PATH=${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}
-          VERSION=${{ matrix.container }}-${{ github.event.repository.default_branch }}
+          VERSION=${{ github.event.repository.default_branch }}
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            VERSION=${{ matrix.container }}-nightly
+            VERSION=nightly
           elif [[ $GITHUB_REF == refs/tags/* ]]; then
-            VERSION=${{ matrix.container }}-${GITHUB_REF#ref/tags/}
+            VERSION=${GITHUB_REF#ref/tags/}
           elif [[ $GITHUB_REF == refs/pull/* ]]; then
-            VERSION=${{ matrix.container }}-pr${{ github.event.number }}
+            VERSION=pr${{ github.event.number }}
           fi
-          TAGS="${DOCKER_PATH}:${VERSION},${DOCKER_PATH}:${VERSION}-sha${GITHUB_SHA::8}"
+          TAGS="${DOCKER_PATH}:${{ matrix.container }}-${VERSION},\
+                ${DOCKER_PATH}:${{ matrix.container }}-${VERSION}-sha${GITHUB_SHA::8}"
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=container_user::${{ github.event.repository.owner.name }}
           echo ::set-output name=source_repo::${DOCKER_PATH}
