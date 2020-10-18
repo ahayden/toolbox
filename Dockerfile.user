@@ -31,7 +31,7 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Create container_user and set work directory
-RUN useradd -m -s /bin/bash ${container_user} \
+RUN useradd --disabled-password -m -s /bin/bash ${container_user} \
     && usermod -a -G sudo ${container_user} \
     && echo "${container_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${container_user} \
     && chmod 0440 /etc/sudoers.d/${container_user}
