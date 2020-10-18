@@ -3,7 +3,7 @@ name: build  #based on template https://github.com/docker/build-push-action
 on:
   push:
     tags:
-      - '20*[0-9]{6}.*'
+      - '20*[0-9]+'
 
 jobs:
   lint:
@@ -30,7 +30,7 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     strategy:
-      matrix: #for container in list ; do (in sequence because of container layers)
+      matrix: #for container in list ; do (in sequence because of container dependencies)
         container: [ 'base', 'user' ]
       max-parallel: 1
     steps:
@@ -51,7 +51,8 @@ jobs:
         run: |
           DOCKER_PATH=${{ github.repository }} #Assume the repo is named the same on DockerHub
           VERSION=$( echo ${GITHUB_REF} |sed -e "s#refs/tags/##g" )
-          TAGS="${DOCKER_PATH}:${{ matrix.container }}-${VERSION},\
+          TAGS="${DOCKER_PATH}:${{ matrix.container }}-latest,\
+                ${DOCKER_PATH}:${{ matrix.container }}-${VERSION},\
                 ${DOCKER_PATH}:${{ matrix.container }}-${VERSION}-${GITHUB_SHA}"
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=container_user::${{ github.repository_owner }}
