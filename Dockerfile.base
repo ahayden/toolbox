@@ -1,6 +1,6 @@
 FROM debian:buster-slim
 
-LABEL maintainer="ahayden@github"
+LABEL maintainer="github.com/ahayden"
 
 ARG version
 RUN test -n "${version}"
