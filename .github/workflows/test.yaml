@@ -11,7 +11,7 @@ jobs:
     container: hadolint/hadolint:latest
     strategy:
       matrix:
-        container: [ 'base', 'user' ]
+        container: [ 'base', 'user', 'dev' ]
     steps:
     - uses: actions/checkout@v2
     - name: Run hadolint

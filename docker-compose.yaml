@@ -3,9 +3,6 @@ version: "3.8"
 services:
   base:
     image: ahayden/toolbox:base
-    build:
-      context: .
-      dockerfile: ./Dockerfile.base
     hostname: base
     extra_hosts:
       - "base:127.0.0.1"
@@ -15,14 +12,24 @@ services:
 
   user:
     image: ahayden/toolbox:user
-    build:
-      context: .
-      dockerfile: ./Dockerfile.user
     hostname: user
     environment:
       TERM: "xterm-color"
     extra_hosts:
       - "user:127.0.0.1"
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - home-persist:/home/ahayden/persist
+    command: /bin/bash
+
+  dev:
+    image: ahayden/toolbox:dev
+    hostname: user
+    environment:
+      TERM: "xterm-color"
+    extra_hosts:
+      - "dev:127.0.0.1"
     restart: unless-stopped
     network_mode: host
     volumes:
