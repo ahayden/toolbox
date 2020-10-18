@@ -1,0 +1,28 @@
+name: test 
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container: hadolint/hadolint:latest
+    strategy:
+      matrix:
+        container: [ 'base', 'user' ]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run hadolint
+      run: hadolint
+        ./Dockerfile.${{ matrix.container }}
+
+  test:
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Validate docker-compose.yaml 
+      run: docker-compose -f docker-compose.yaml config
+

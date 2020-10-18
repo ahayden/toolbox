@@ -10,6 +10,12 @@ RUN test -n "${container_user}"
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         bash-completion \
         curl \
+	nmap \
+	binutils \
+	dnsutils \
+	net-tools \
+	netcat \
+	iputils-ping \
         git \
         gnupg2 \
         htop \
@@ -28,7 +34,17 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN useradd -m -s /bin/bash ${container_user} \
     && usermod -a -G sudo ${container_user} \
     && echo "${container_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${container_user} \
-	&& chmod 0440 /etc/sudoers.d/${container_user}
+    && chmod 0440 /etc/sudoers.d/${container_user}
+
 USER ${container_user}
+
 WORKDIR /home/${container_user}
+
+# set links to persistent user environment
+RUN su - ${container_user} -c "cd && mkdir -p persist/.ssh && ln -s persist/.ssh . ; \
+    mkdir -p .local/bin ; \
+    mkdir -p persist/src && ln -s persist/src . ; \
+    mkdir -p persist/.config && ln -s persist/.config . ; \
+    touch persist/.gitconfig && ln -s persist/.gitconfig . ; \
+    mkdir -p persist/.aws && ln -s persist/.aws ."
 
