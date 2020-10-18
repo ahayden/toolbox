@@ -19,6 +19,7 @@ jobs:
     - name: Run hadolint
       run: hadolint
         Dockerfile.base
+        Dockerfile.user
 
   test:
     needs: [lint]
@@ -97,6 +98,29 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/386
           build-args: |
             version=${{ steps.prep.outputs.version }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.prep.outputs.tags }}
+          labels: |
+            org.opencontainers.image.title=${{ fromJson(steps.repo.outputs.result).name }}
+            org.opencontainers.image.description=${{ fromJson(steps.repo.outputs.result).description }}
+            org.opencontainers.image.url=${{ fromJson(steps.repo.outputs.result).html_url }}
+            org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).clone_url }}
+            org.opencontainers.image.version=${{ steps.prep.outputs.version }}
+            org.opencontainers.image.created=${{ steps.prep.outputs.created }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
+      -
+        name: Build and push user image
+        id: docker_build_user
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile.user
+          platforms: linux/amd64,linux/arm64,linux/386
+          build-args: |
+            version=${{ steps.prep.outputs.version }}
+            container_user=${{ steps.prep.outputs.container_user }}
+            source_repo=${{ steps.prep.outputs.source_repo }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.prep.outputs.tags }}
           labels: |
