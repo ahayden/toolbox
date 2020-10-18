@@ -35,7 +35,7 @@ jobs:
     strategy:
       matrix:
         container: [ 'base', 'user' ]
-      max_parallel: 1
+      max-parallel: 1
     steps:
       -
         name: Checkout src
