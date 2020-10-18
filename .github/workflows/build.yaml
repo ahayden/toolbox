@@ -3,7 +3,7 @@ name: build  #based on template https://github.com/docker/build-push-action
 on:
   push:
     tags:
-      - '20*'
+      - '20*[0-9]{6}.*'
 
 jobs:
   lint:
