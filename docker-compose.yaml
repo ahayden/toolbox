@@ -15,22 +15,22 @@ services:
     network_mode: host
     command: /bin/bash
 
-# user:
-#   image: ahayden/toolbox:user-${version}
-#   build:
-#     context: .
-#     dockerfile: ./Dockerfile.user
-#     args:
-#       user: ${user}
-#       version: ${version}
-#   hostname: user
-#   extra_hosts:
-#     - "user:127.0.0.1"
-#   restart: unless-stopped
-#   network_mode: host
-#   volumes:
-#     - home-persist:/home/ahayden/persist
-#   command: /bin/bash
+  user:
+    image: ahayden/toolbox:user-${version}
+    build:
+      context: .
+      dockerfile: ./Dockerfile.user
+      args:
+        container_user: ${container_user}
+        version: ${version}
+    hostname: user
+    extra_hosts:
+      - "user:127.0.0.1"
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - home-persist:/home/ahayden/persist
+    command: /bin/bash
 
 volumes:
   home-persist:

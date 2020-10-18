@@ -1,0 +1,34 @@
+ARG source_repo
+ARG version
+FROM ${source_repo}:base-${version}
+
+ARG container_user
+RUN test -n "${container_user}"
+
+# Install the tools that I need in all my environments
+# hadolint ignore=DL3008
+RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
+        bash-completion \
+        curl \
+        git \
+        gnupg2 \
+        htop \
+        openssh-client \
+        sudo \
+        tmux \
+        vim \
+    && apt-get -y autoclean \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/lists/*
+
+# Enable shell pipefail option
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Create container_user and set work directory
+RUN useradd -m -s /bin/bash ${container_user} \
+    && usermod -a -G sudo ${container_user} \
+    && echo "${container_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${container_user} \
+	&& chmod 0440 /etc/sudoers.d/${container_user}
+USER ${container_user}
+WORKDIR /home/${container_user}
+
