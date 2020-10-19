@@ -52,8 +52,7 @@ jobs:
           DOCKER_PATH=${{ github.repository }} #Assume the repo is named the same on DockerHub
           VERSION=$( echo ${GITHUB_REF} |sed -e "s#refs/tags/##g" )
           TAGS="${DOCKER_PATH}:${{ matrix.container }},\
-                ${DOCKER_PATH}:${{ matrix.container }}-${VERSION},\
-                ${DOCKER_PATH}:${{ matrix.container }}-${VERSION}-${GITHUB_SHA}"
+                ${DOCKER_PATH}:${{ matrix.container }}-${VERSION},"
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=container_user::${{ github.repository_owner }}
           echo ::set-output name=source_repo::${DOCKER_PATH} #Pull layers from DockerHub
