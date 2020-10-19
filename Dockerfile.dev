@@ -11,8 +11,8 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         r-base golang gcc maven npm jq xxd \
         ruby ruby-dev make \
     && apt-get -y autoclean \
-    && apt-get -y autoremove \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get -y autoremove 
+#    && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install setuptools pre-commit pyyaml \
             awscli awscli-saml awsmfa boto3 sceptre sceptre-ssm-resolver \
@@ -26,7 +26,3 @@ RUN npm install -g snyk
 
 RUN gem install travis --no-document
 
-WORKDIR /tmp
-RUN git clone https://github.com/ahayden/mkcert.git && cd /tmp/mkcert && \
-	go build -ldflags "-X main.Version=$(git describe --tags)" && \
-	mkdir -p /usr/local/bin && cp /tmp/mkcert/mkcert /usr/local/bin/
