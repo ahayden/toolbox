@@ -17,14 +17,14 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "/tmp/session-manager-plugin.deb" && dpkg -i /tmp/session-manager-plugin.deb
 
+# hadolint ignore=DL3028
+RUN gem install travis --no-document
+
 USER ${container_user}
 
 # hadolint ignore=DL3013
-RUN python3 -m pip install setuptools pre-commit pyyaml \
+RUN python3 -m pip install setuptools pre-commit pyyaml wheel \
             awscli awscli-saml awsmfa boto3 sceptre sceptre-ssm-resolver \
 	    sceptre-date-resolver wheel ansible colorama==0.3.9 \
 	    git+https://github.com/Sage-Bionetworks/jccli
-
-# hadolint ignore=DL3028
-RUN gem install travis --no-document
 
