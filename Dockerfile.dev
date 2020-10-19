@@ -13,7 +13,7 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         r-base golang gcc maven npm jq xxd \
         ruby ruby-dev make \
     && apt-get -y autoclean \
-    && apt-get -y autoremove 
+    && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "/tmp/session-manager-plugin.deb" && dpkg -i /tmp/session-manager-plugin.deb
