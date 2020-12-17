@@ -23,7 +23,7 @@ RUN gem install travis --no-document
 USER ${container_user}
 
 # hadolint ignore=DL3013
-RUN python3 -m pip install setuptools pre-commit pyyaml wheel \
+RUN python3 -m pip --no-cache-dir install setuptools pre-commit pyyaml wheel \
             awscli awscli-saml awsmfa boto3 sceptre sceptre-ssm-resolver \
 	    sceptre-date-resolver wheel ansible colorama==0.3.9 \
 	    git+https://github.com/Sage-Bionetworks/jccli
