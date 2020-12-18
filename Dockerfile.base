@@ -12,6 +12,8 @@ LABEL about.license="SPDX:Apache-2.0"
 # Install dependencies
 # hadolint ignore=DL3008
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
+	curl \
+        gnupg2 \
         apt-transport-https \
         ca-certificates \
     && update-ca-certificates \

@@ -9,7 +9,6 @@ RUN test -n "${container_user}"
 # hadolint ignore=DL3008
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         bash-completion \
-        curl \
 	nmap \
 	binutils \
 	dnsutils \
@@ -17,7 +16,6 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 	netcat \
 	iputils-ping \
         git \
-        gnupg2 \
         htop \
         openssh-client \
         sudo \
