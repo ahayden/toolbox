@@ -18,5 +18,7 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 # hadolint ignore=DL3028
 RUN gem install travis --no-document
 
+COPY init.sh /home/${container_user}/.local/bin/init.sh
+
 USER ${container_user}
 
