@@ -1,0 +1,18 @@
+ARG source_repo
+ARG version
+FROM ${source_repo}:user-${version}
+
+ARG container_user
+RUN test -n "${container_user}"
+
+USER root
+
+# hadolint ignore=DL3008
+RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
+        jupyter-notebook \
+    && apt-get -y autoclean \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/lists/*
+
+USER ${container_user}
+
