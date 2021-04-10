@@ -31,14 +31,11 @@ jobs:
         name: Versioning logic
         id: prep
         run: |
-          DOCKER_PATH=${{ github.repository }} #Assume the repo is named the same on DockerHub
-          VERSION=$( echo ${GITHUB_REF} |sed -e "s#refs/tags/##g" )
-          TAGS="${DOCKER_PATH}:${{ matrix.container }},\
-                ${DOCKER_PATH}:${{ matrix.container }}-${VERSION},"
+          DOCKER_PATH=${{ github.repository }} 
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=container_user::${{ github.repository_owner }}
           echo ::set-output name=source_repo::${DOCKER_PATH} #Pull layers from DockerHub
-          echo ::set-output name=tags::${TAGS}
+          echo ::set-output name=tags::${DOCKER_PATH}:${{ matrix.container }}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       -
         name: Set up QEMU
@@ -72,7 +69,6 @@ jobs:
             org.opencontainers.image.description=${{ fromJson(steps.repo.outputs.result).description }}
             org.opencontainers.image.url=${{ fromJson(steps.repo.outputs.result).html_url }}
             org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).clone_url }}
-            org.opencontainers.image.version=${{ steps.prep.outputs.version }}
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
