@@ -6,20 +6,20 @@ on:
       - '20*[0-9]+'  #build on tags like '2020101801'
 
 jobs:
-# lint:
-#   runs-on: ubuntu-latest
-#   container: hadolint/hadolint:latest
-#   strategy:
-#     matrix:
-#       container: [ 'base', 'user', 'dev', 'jupyter' ]
-#   steps:
-#   - uses: actions/checkout@v2
-#   - name: Run hadolint
-#     run: hadolint
-#       ./Dockerfile.${{ matrix.container }}
+  lint:
+    runs-on: ubuntu-latest
+    container: hadolint/hadolint:latest
+    strategy:
+      matrix:
+        container: [ 'base', 'user', 'dev', 'jupyter' ]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run hadolint
+      run: hadolint
+        ./Dockerfile.${{ matrix.container }}
 
   test:
-#   needs: [lint]
+    needs: [lint]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
