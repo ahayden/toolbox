@@ -1,12 +1,6 @@
 FROM debian:bullseye-slim
 
 LABEL maintainer="github.com/ahayden"
-
-ARG version
-RUN test -n "${version}"
-
-ENV version=${version}
-LABEL version=${version}
 LABEL about.license="SPDX:Apache-2.0"
 
 # Install dependencies

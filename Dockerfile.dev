@@ -1,6 +1,5 @@
 ARG source_repo
-ARG version
-FROM ${source_repo}:user-${version}
+FROM ${source_repo}:user
 
 ARG container_user
 RUN test -n "${container_user}"

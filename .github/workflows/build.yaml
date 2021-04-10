@@ -28,11 +28,10 @@ jobs:
             const repo = await github.repos.get(context.repo)
             return repo.data
       -
-        name: Versioning logic
+        name: Metadata logic
         id: prep
         run: |
           DOCKER_PATH=${{ github.repository }} 
-          echo ::set-output name=version::${VERSION}
           echo ::set-output name=container_user::${{ github.repository_owner }}
           echo ::set-output name=source_repo::${DOCKER_PATH} #Pull layers from DockerHub
           echo ::set-output name=tags::${DOCKER_PATH}:${{ matrix.container }}
@@ -59,7 +58,6 @@ jobs:
           file: ./Dockerfile.${{ matrix.container }}
           platforms: linux/amd64, linux/arm64 #, linux/386
           build-args: |
-            version=${{ steps.prep.outputs.version }}
             container_user=${{ steps.prep.outputs.container_user }}
             source_repo=${{ steps.prep.outputs.source_repo }}
           push: ${{ github.event_name != 'pull_request' }}
