@@ -36,5 +36,19 @@ services:
       - home-persist:/home/ahayden/persist
     command: /bin/bash -l
 
+  jupyter:
+    image: ahayden/toolbox:jupyter
+    hostname: jupyter
+    environment:
+      TERM: "xterm-color"
+    extra_hosts:
+      jupyter: 127.0.0.1
+    ports:
+      - 8888:8888
+    volumes:
+      - home-persist:/home/ahayden/persist
+    container_name: jupyter
+    command: /bin/bash -l
+
 volumes:
   home-persist:
