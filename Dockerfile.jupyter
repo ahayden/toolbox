@@ -9,17 +9,16 @@ USER root
 
 # hadolint ignore=DL3008
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
-        jupyter-notebook \
+        tini jupyter-notebook \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT ["tini", "-g", "--"]
+ENTRYPOINT ["tini", "--"]
 
 EXPOSE 8888
 
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0"]
-
 
 USER ${container_user}
 
