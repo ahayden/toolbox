@@ -8,7 +8,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    container: hadolint/hadolint:latest
+    container: ghcr.io/hadolint/hadolint:latest
     strategy:
       matrix:
         container: [ 'base', 'user', 'dev', 'jupyter' ]
