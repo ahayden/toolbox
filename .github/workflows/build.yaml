@@ -11,7 +11,7 @@ jobs:
     container: hadolint/hadolint:latest
     strategy:
       matrix:
-        container: [ 'base', 'user', 'dev' ]
+        container: [ 'base', 'user', 'dev', 'jupyter' ]
     steps:
     - uses: actions/checkout@v2
     - name: Run hadolint
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: #for container in list ; do (in sequence because of container dependencies)
-        container: [ 'base', 'user', 'dev' ]
+        container: [ 'base', 'user', 'dev', 'jupyter' ]
       max-parallel: 1
     steps:
       -
