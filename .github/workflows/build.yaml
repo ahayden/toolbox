@@ -9,8 +9,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     if: >
-      !contains(github.event.head_commit.message, 'ci skip') &&
-      !contains(github.event.pull_request.title, 'ci skip')
+      !contains(github.event.head_commit.message, 'skip-ci') &&
+      !contains(github.event.pull_request.title, 'skip-ci')
     strategy:
       matrix: #for container in list ; do (in sequence because of container dependencies)
         container: [ 'base', 'user', 'dev', 'jupyter' ]

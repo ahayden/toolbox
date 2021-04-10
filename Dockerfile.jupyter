@@ -14,7 +14,7 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 USER ${container_user}
 
-RUN python3 -m pip3 install sympy
+RUN python3 -m pip install sympy
 
 ENTRYPOINT ["tini", "--"]
 
