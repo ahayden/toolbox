@@ -1,5 +1,5 @@
 ARG source_repo
-FROM ${source_repo}:user
+FROM ${source_repo}:dev
 
 ARG container_user
 RUN test -n "${container_user}"
