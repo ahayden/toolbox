@@ -27,8 +27,10 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN adduser --disabled-password ${container_user} \
-    && usermod -a -G sudo ${container_user} \ 
     && usermod -a -G users ${container_user} 
+    && usermod -a -G sudo ${container_user} \
+    && echo "${container_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${container_user} \
+    && chmod 0440 /etc/sudoers.d/${container_user}
 
 # set links to persistent user environment
 RUN su - ${container_user} -c "cd && \
