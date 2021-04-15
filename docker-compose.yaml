@@ -42,9 +42,9 @@ services:
     environment:
       TERM: "xterm-color"
     extra_hosts:
-      jupyter: 127.0.0.1
-    ports:
-      - 8888:8888
+      - "jupyter:127.0.0.1"
+    network_mode: host
+    container_name: jupyter
     volumes:
       - home-persist:/home/ahayden/persist
 
