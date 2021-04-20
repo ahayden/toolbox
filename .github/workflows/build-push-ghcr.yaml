@@ -33,7 +33,7 @@ jobs:
         run: |
           echo ::set-output name=container_user::${{ github.repository_owner }}
           echo ::set-output name=source_repo::${{ github.repository}}
-          echo ::set-output name=tags::${{ github.repository}}:${{ matrix.container }}
+          echo ::set-output name=tags::ghcr.io/${{ github.repository}}:${{ matrix.container }}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       -
         name: Set up QEMU
