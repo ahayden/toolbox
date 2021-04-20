@@ -15,7 +15,7 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 RUN gem install travis --no-document
 
-COPY init.sh /home/${container_user}/init.sh
+COPY git-init /home/${container_user}/git-init
 
 USER ${container_user}
 
