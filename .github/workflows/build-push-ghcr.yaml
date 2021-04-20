@@ -62,8 +62,6 @@ jobs:
             source_repo=${{ steps.prep.outputs.source_repo }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.prep.outputs.tags }}
-          secrets: |
-            GIT_AUTH_TOKEN=${{ github.token }}
           labels: |
             org.opencontainers.image.title=${{ fromJson(steps.repo.outputs.result).name }}
             org.opencontainers.image.description=${{ fromJson(steps.repo.outputs.result).description }}
