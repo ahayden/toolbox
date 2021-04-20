@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   base:
-    image: ahayden/toolbox:base
+    image: ghcr.io/ahayden/toolbox:base
     hostname: base
     extra_hosts:
       - "base:127.0.0.1"
@@ -11,7 +11,7 @@ services:
     command: /bin/bash 
 
   user:
-    image: ahayden/toolbox:user
+    image: ghcr.io/ahayden/toolbox:user
     hostname: user
     environment:
       TERM: "xterm-color"
@@ -24,7 +24,7 @@ services:
     command: /bin/bash -l
 
   dev:
-    image: ahayden/toolbox:dev
+    image: ghcr.io/ahayden/toolbox:dev
     hostname: dev
     environment:
       TERM: "xterm-color"
@@ -37,7 +37,7 @@ services:
     command: /bin/bash -l
 
   jupyter:
-    image: ahayden/toolbox:jupyter
+    image: ghcr.io/ahayden/toolbox:jupyter
     hostname: jupyter
     environment:
       TERM: "xterm-color"
