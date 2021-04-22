@@ -20,7 +20,8 @@ services:
     restart: unless-stopped
     network_mode: host
     volumes:
-      - home-persist:/home/$USER/persist
+      - home-persist:/home/$USER/persist #local and container user are named the same
+      - $HOME/src:/home/$USER/src
     command: /bin/bash -l
 
   dev:
@@ -48,6 +49,7 @@ services:
     container_name: jupyter
     volumes:
       - home-persist:/home/$USER/persist
+      - $HOME/src:/home/$USER/src
 
 volumes:
   home-persist:
