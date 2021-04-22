@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
     network_mode: host
     volumes:
-      - home-persist:/home/ahayden/persist
+      - home-persist:/home/$USER/persist
     command: /bin/bash -l
 
   dev:
@@ -33,8 +33,8 @@ services:
     restart: unless-stopped
     network_mode: host
     volumes:
-      - home-persist:/home/ahayden/persist
-      - ./src:/home/ahayden/src
+      - home-persist:/home/$USER/persist
+      - $HOME/src:/home/$USER/src
     command: /bin/bash -l
 
   jupyter:
@@ -47,7 +47,7 @@ services:
     network_mode: host
     container_name: jupyter
     volumes:
-      - home-persist:/home/ahayden/persist
+      - home-persist:/home/$USER/persist
 
 volumes:
   home-persist:
