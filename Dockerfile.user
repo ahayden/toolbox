@@ -35,7 +35,6 @@ RUN adduser --disabled-password ${container_user} \
 # set links to persistent user environment
 RUN su - ${container_user} -c "cd && \
     mkdir -p persist/.ssh && ln -s persist/.ssh . ; \
-    mkdir -p persist/src && ln -s persist/src . ; \
     mkdir -p persist/.config && ln -s persist/.config . ; \
     touch persist/.gitconfig && ln -s persist/.gitconfig . ; \
     mkdir -p persist/.aws && ln -s persist/.aws ."
