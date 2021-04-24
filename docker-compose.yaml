@@ -38,6 +38,20 @@ services:
       - $HOME/src:/home/$USER/src
     command: /bin/bash -l
 
+  sci:
+    image: ghcr.io/ahayden/toolbox:sci
+    hostname: sci
+    environment:
+      TERM: "xterm-color"
+    extra_hosts:
+      - "sci:127.0.0.1"
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - home-persist:/home/$USER/persist
+      - $HOME/src:/home/$USER/src
+    command: /bin/bash -l
+
   jupyter:
     image: ghcr.io/ahayden/toolbox:jupyter
     hostname: jupyter

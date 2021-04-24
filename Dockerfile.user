@@ -6,19 +6,10 @@ RUN test -n "${container_user}"
 
 # Install the tools that I need in all my environments
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
-        bash-completion \
-	nmap \
-	binutils \
-	dnsutils \
-	net-tools \
-	netcat \
-	iputils-ping \
-        git \
-        htop \
-        openssh-client \
-        sudo \
-        tmux \
-        neovim \
+        bash-completion nmap ncat binutils \
+	dnsutils net-tools iputils-ping git \
+        htop \ openssh-client \ sudo \ tmux \
+        neovim socat \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*

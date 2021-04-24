@@ -13,7 +13,7 @@ jobs:
       !contains(github.event.pull_request.title, 'skip-ci')
     strategy:
       matrix: #for container in list ; do (in sequence because of container dependencies)
-        container: [ 'base', 'user', 'dev', 'jupyter' ]
+        container: [ 'base', 'user', 'dev', 'sci', 'jupyter' ]
       max-parallel: 1
     steps:
       -

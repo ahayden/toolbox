@@ -1,5 +1,5 @@
 ARG source_repo
-FROM ${source_repo}:user
+FROM ${source_repo}:dev
 
 ARG container_user
 RUN test -n "${container_user}"
@@ -7,15 +7,12 @@ RUN test -n "${container_user}"
 USER root
 
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
-        python3 python3-pip python3-dev python3-setuptools \
-        golang gcc g++ jq xxd ruby ruby-dev make man-db \
+        r-base texlive texlive-latex-extra lmodern \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
 
-RUN gem install travis --no-document
-
-COPY git-init /home/${container_user}/git-init
+RUN python3 -m pip install sympy numpy matplotlib statsmodels
 
 USER ${container_user}
 

@@ -1,5 +1,5 @@
 ARG source_repo
-FROM ${source_repo}:dev
+FROM ${source_repo}:sci
 
 ARG container_user
 RUN test -n "${container_user}"
@@ -14,12 +14,10 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 USER ${container_user}
 
-RUN python3 -m pip install sympy numpy matplotlib statsmodels
-
 ENTRYPOINT ["tini", "--"]
 
 EXPOSE 8888
 
-CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.password=''", "--NotebookApp.notebook_dir='src'"]
+CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.password=''", "--NotebookApp.notebook_dir='src/github.com/${container_user}'"]
 
 
