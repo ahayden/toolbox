@@ -12,7 +12,7 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
 
-RUN python3 -m pip install sympy numpy matplotlib statsmodels
+RUN python3 -m pip install sympy scipy numpy matplotlib statsmodels
 
 USER ${container_user}
 
