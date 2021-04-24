@@ -1,4 +1,4 @@
-name: build-push-ghcr
+name: build-amd64-push-ghcr
 
 on:
   push:

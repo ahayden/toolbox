@@ -1,4 +1,4 @@
-name: build-push-ghcr
+name: build-arm64-push-ghcr
 
 on:
   push:
