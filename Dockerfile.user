@@ -8,7 +8,7 @@ RUN test -n "${container_user}"
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         bash-completion nmap ncat binutils \
 	dnsutils net-tools iputils-ping git \
-        htop \ openssh-client \ sudo \ tmux \
+        htop openssh-client sudo tmux \
         neovim socat \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
