@@ -1,13 +1,13 @@
-name: build-user-push-ghcr
+name: build-jupyter-push-ghcr
 
 on:
   workflow_run:
     workflows: 
-      - 'build-base-push-ghcr' 
+      - 'build-sci-push-ghcr' 
 
 jobs:
   build:
-    name: user
+    name: jupyter
     runs-on: ubuntu-latest
     steps:
       -

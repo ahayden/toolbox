@@ -1,13 +1,13 @@
-name: build-user-push-ghcr
+name: build-tex-push-ghcr
 
 on:
   workflow_run:
     workflows: 
-      - 'build-base-push-ghcr' 
+      - 'build-dev-push-ghcr' 
 
 jobs:
   build:
-    name: user
+    name: tex
     runs-on: ubuntu-latest
     steps:
       -
