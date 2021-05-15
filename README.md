@@ -1,6 +1,6 @@
 # Development tools in container images
 
-Maintained, reproducible, multiarch development environments
+Maintained, multiarch development environments
 
 ## Setup
 

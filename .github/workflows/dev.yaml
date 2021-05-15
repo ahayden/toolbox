@@ -3,7 +3,7 @@ name: dev
 on:
   workflow_run:
     workflows: 
-      - 'user' 
+      - 'base' 
     types:
       - completed
 

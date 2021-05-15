@@ -10,20 +10,6 @@ services:
     network_mode: host
     command: /bin/bash 
 
-  user:
-    image: ghcr.io/ahayden/toolbox:user
-    hostname: user
-    environment:
-      TERM: "xterm-color"
-    extra_hosts:
-      - "user:127.0.0.1"
-    restart: unless-stopped
-    network_mode: host
-    volumes:
-      - home-persist:/home/$USER/persist #local and container user are named the same
-      - $HOME/src:/home/$USER/src
-    command: /bin/bash -l
-
   dev:
     image: ghcr.io/ahayden/toolbox:dev
     hostname: dev
@@ -45,22 +31,8 @@ services:
       TERM: "xterm-color"
     extra_hosts:
       - "sci:127.0.0.1"
-    restart: unless-stopped
     network_mode: host
-    volumes:
-      - home-persist:/home/$USER/persist
-      - $HOME/src:/home/$USER/src
-    command: /bin/bash -l
-
-  jupyter:
-    image: ghcr.io/ahayden/toolbox:jupyter
-    hostname: jupyter
-    environment:
-      TERM: "xterm-color"
-    extra_hosts:
-      - "jupyter:127.0.0.1"
-    network_mode: host
-    container_name: jupyter
+    container_name: sci
     volumes:
       - home-persist:/home/$USER/persist
       - $HOME/src:/home/$USER/src

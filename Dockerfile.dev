@@ -1,10 +1,13 @@
 ARG source_repo
-FROM ${source_repo}:user
+FROM ${source_repo}:base
 
 ARG container_user
 RUN test -n "${container_user}"
 
-USER root
+# Enable shell pipefail option
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+WORKDIR /tmp
 
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         python3 python3-pip python3-dev python3-setuptools awscli \
@@ -15,14 +18,25 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 RUN gem install travis --no-document
 
-WORKDIR /tmp
-
 RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin-amd64.deb" \
     && dpkg -i session-manager-plugin-amd64.deb ; exit 0 #ignore error
 
-RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin-arm64.deb" \
+RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_arm64/session-manager-plugin.deb" -o "session-manager-plugin-arm64.deb" \
     && dpkg -i session-manager-plugin-arm64.deb ; exit 0 #ignore error
+    
+RUN adduser --disabled-password ${container_user} \
+    && usermod -a -G users ${container_user} \
+    && usermod -a -G sudo ${container_user} \
+    && echo "${container_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${container_user} \
+    && chmod 0440 /etc/sudoers.d/${container_user}
+
+# set links to persistent user environment
+RUN su - ${container_user} -c "cd && \
+    mkdir -p persist/.ssh && ln -s persist/.ssh . ; \
+    mkdir -p persist/.config && ln -s persist/.config . ; \
+    touch persist/.gitconfig && ln -s persist/.gitconfig . ; \
+    mkdir -p persist/.aws && ln -s persist/.aws ."
 
 USER ${container_user}
 
-COPY git-init /home/${container_user}/git-init
+RUN echo 'eval `ssh-agent -s`; [ -f ~/.ssh/github ] && ssh-add ~/.ssh/github' > /home/${container_user}/git-init
