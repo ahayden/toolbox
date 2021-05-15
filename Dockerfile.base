@@ -5,6 +5,8 @@ LABEL about.license="SPDX:Apache-2.0"
 ARG container_user
 RUN test -n "${container_user}"
 
+USER root
+
 WORKDIR /tmp
 
 # Enable shell pipefail option

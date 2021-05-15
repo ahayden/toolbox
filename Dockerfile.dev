@@ -4,6 +4,8 @@ FROM ${source_repo}:base
 ARG container_user
 RUN test -n "${container_user}"
 
+USER root
+
 # Enable shell pipefail option
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
