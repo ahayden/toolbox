@@ -24,12 +24,6 @@ RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubunt
 RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_arm64/session-manager-plugin.deb" -o "session-manager-plugin-arm64.deb" \
     && dpkg -i session-manager-plugin-arm64.deb ; exit 0 #ignore error
     
-RUN adduser --disabled-password ${container_user} \
-    && usermod -a -G users ${container_user} \
-    && usermod -a -G sudo ${container_user} \
-    && echo "${container_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${container_user} \
-    && chmod 0440 /etc/sudoers.d/${container_user}
-
 # set links to persistent user environment
 RUN su - ${container_user} -c "cd && \
     mkdir -p persist/.ssh && ln -s persist/.ssh . ; \
