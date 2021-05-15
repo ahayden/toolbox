@@ -28,9 +28,9 @@ jobs:
         name: Metadata logic
         id: prep
         run: |
-          echo ::set-output name=container_user::${{ github.repository_owner }}
-          echo ::set-output name=source_repo::ghcr.io/${{ github.repository }}
-          echo ::set-output name=tags::ghcr.io/${{ github.repository }}:${{ github.workflow }}
+          echo ::set-output name=container_user::${{github.repository_owner}}
+          echo ::set-output name=source_repo::ghcr.io/${{github.repository}}
+          echo ::set-output name=tags::ghcr.io/${{github.repository}}:${{github.workflow}}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       -
         name: Set up QEMU
@@ -44,26 +44,26 @@ jobs:
         uses: docker/login-action@v1 
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
       -
         name: Build and push image
         id: docker_build_and_push
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile.${{ github.workflow }}
-          platforms: linux/amd64, linux/arm64
+          file: ./Dockerfile.${{github.workflow}}
+          platforms: linux/amd64, linux/arm64, linux/riscv64, linmux/386, linux/arm/v6, linux/arm/v7 
           build-args: |
-            container_user=${{ steps.prep.outputs.container_user }}
-            source_repo=${{ steps.prep.outputs.source_repo }}
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.prep.outputs.tags }}
+            container_user=${{steps.prep.outputs.container_user}}
+            source_repo=${{steps.prep.outputs.source_repo}}
+          push: ${{github.event_name != 'pull_request'}}
+          tags: ${{steps.prep.outputs.tags}}
           labels: |
-            org.opencontainers.image.title=${{ fromJson(steps.repo.outputs.result).name }}
-            org.opencontainers.image.description=${{ fromJson(steps.repo.outputs.result).description }}
-            org.opencontainers.image.url=${{ fromJson(steps.repo.outputs.result).html_url }}
-            org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).clone_url }}
-            org.opencontainers.image.created=${{ steps.prep.outputs.created }}
-            org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
+            org.opencontainers.image.title=${{fromJson(steps.repo.outputs.result).name}}
+            org.opencontainers.image.description=${{fromJson(steps.repo.outputs.result).description}}
+            org.opencontainers.image.url=${{fromJson(steps.repo.outputs.result).html_url}}
+            org.opencontainers.image.source=${{fromJson(steps.repo.outputs.result).clone_url}}
+            org.opencontainers.image.created=${{steps.prep.outputs.created}}
+            org.opencontainers.image.revision=${{github.sha}}
+            org.opencontainers.image.licenses=${{fromJson(steps.repo.outputs.result).license.spdx_id}}
