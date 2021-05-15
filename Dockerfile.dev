@@ -15,7 +15,14 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 RUN gem install travis --no-document
 
-COPY git-init /home/${container_user}/git-init
+WORKDIR /tmp
+
+RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin-amd64.deb"
+
+RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin-arm64.deb"
+
+RUN dpkg -i session-manager-plugin-amd64.deb || dpkg -i session-manager-plugin-arm64.deb
 
 USER ${container_user}
 
+COPY git-init /home/${container_user}/git-init
