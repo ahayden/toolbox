@@ -20,6 +20,6 @@ USER ${container_user}
 
 ENTRYPOINT ["tini", "--"]
 
-CMD jupyter notebook --port=8888 --no-browser --ip=0.0.0.0 --NotebookApp.token='' --NotebookApp.password='' --NotebookApp.notebook_dir=src/github.com/
+CMD jupyter notebook --port=8888 --no-browser --ip=0.0.0.0 --NotebookApp.token='' --NotebookApp.password='' --NotebookApp.notebook_dir=src
 
 

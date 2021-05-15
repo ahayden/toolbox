@@ -33,6 +33,8 @@ RUN su - ${container_user} -c "cd && \
     touch persist/.gitconfig && ln -s persist/.gitconfig . ; \
     mkdir -p persist/.aws && ln -s persist/.aws ."
 
+WORKDIR /home/${container_user}
+
 USER ${container_user}
 
-RUN echo 'eval `ssh-agent -s`; [ -f ~/.ssh/github ] && ssh-add ~/.ssh/github' > /home/${container_user}/git-init
+RUN echo 'eval `ssh-agent -s`; [ -f ~/.ssh/github ] && ssh-add ~/.ssh/github' > git-init
