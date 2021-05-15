@@ -1,9 +1,11 @@
-name: build-push-ghcr
+name: build-user-push-ghcr
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types:
+      - 'published'
+    tags:
+      - 'base' # user tag depends on base building first
 
 jobs:
   build:
@@ -11,10 +13,6 @@ jobs:
     if: >
       !contains(github.event.head_commit.message, 'skip-ci') &&
       !contains(github.event.pull_request.title, 'skip-ci')
-    strategy:
-      matrix: #for container in list ; do (in sequence because of container dependencies)
-        container: [ 'base', 'user', 'dev', 'tex', 'sci', 'jupyter' ]
-      max-parallel: 1
     steps:
       -
         name: Checkout src
@@ -33,7 +31,7 @@ jobs:
         run: |
           echo ::set-output name=container_user::${{ github.repository_owner }}
           echo ::set-output name=source_repo::ghcr.io/${{ github.repository}}
-          echo ::set-output name=tags::ghcr.io/${{ github.repository}}:${{ matrix.container }}
+          echo ::set-output name=tags::ghcr.io/${{ github.repository}}:user
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       -
         name: Set up QEMU
@@ -55,7 +53,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile.${{ matrix.container }}
+          file: ./Dockerfile.user
           platforms: linux/amd64, linux/arm64
           build-args: |
             container_user=${{ steps.prep.outputs.container_user }}
