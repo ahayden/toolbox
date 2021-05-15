@@ -1,13 +1,16 @@
-name: build-dev-push-ghcr
+name: build-tex
 
 on:
   workflow_run:
     workflows: 
-      - 'build-user-push-ghcr' 
+      - 'build-dev' 
+    types:
+      - completed
 
 jobs:
   build:
-    name: dev
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: tex
     runs-on: ubuntu-latest
     steps:
       -

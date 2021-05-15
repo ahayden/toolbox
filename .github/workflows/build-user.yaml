@@ -1,13 +1,16 @@
-name: build-sci-push-ghcr
+name: build-user
 
 on:
   workflow_run:
     workflows: 
-      - 'build-tex-push-ghcr' 
+      - 'build-base' 
+    types:
+      - completed
 
 jobs:
   build:
-    name: sci
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: user
     runs-on: ubuntu-latest
     steps:
       -

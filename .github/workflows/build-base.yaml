@@ -1,13 +1,16 @@
-name: build-user-push-ghcr
+name: build-base
 
 on:
-  workflow_run:
-    workflows: 
-      - 'build-base-push-ghcr' 
+  push:
+    branches:
+      - main
 
 jobs:
   build:
-    name: user
+    if: >
+      !contains(github.event.head_commit.message, 'skip-ci') &&
+      !contains(github.event.pull_request.title, 'skip-ci')
+    name: base
     runs-on: ubuntu-latest
     steps:
       -

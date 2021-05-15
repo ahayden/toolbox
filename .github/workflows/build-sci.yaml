@@ -1,13 +1,16 @@
-name: build-jupyter-push-ghcr
+name: build-sci
 
 on:
   workflow_run:
     workflows: 
-      - 'build-sci-push-ghcr' 
+      - 'build-tex' 
+    types:
+      - completed
 
 jobs:
   build:
-    name: jupyter
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: sci
     runs-on: ubuntu-latest
     steps:
       -
