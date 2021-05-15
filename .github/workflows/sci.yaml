@@ -3,7 +3,7 @@ name: sci
 on:
   workflow_run:
     workflows: 
-      - 'tex' 
+      - 'dev' 
     types:
       - completed
 
