@@ -2,8 +2,6 @@ name: build-user-push-ghcr
 
 on:
   registry_package:
-    types:
-      - 'published'
     tags:
       - 'base' # user tag depends on base building first
 
