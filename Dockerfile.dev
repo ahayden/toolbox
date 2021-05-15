@@ -21,8 +21,6 @@ RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubunt
 
 RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin-arm64.deb"
 
-RUN dpkg -i session-manager-plugin-amd64.deb || dpkg -i session-manager-plugin-arm64.deb
-
 USER ${container_user}
 
 COPY git-init /home/${container_user}/git-init
