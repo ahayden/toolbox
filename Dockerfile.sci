@@ -13,12 +13,13 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
 
-RUN python3 -m pip install sympy scipy numpy matplotlib statsmodels jupyter
+RUN python3 -m pip install sympy scipy numpy matplotlib statsmodels jupyterlab
 
 USER ${container_user}
 
 ENTRYPOINT ["tini", "--"]
 
-CMD jupyter lab --port=8888 --no-browser --ip=0.0.0.0 --LabApp.token='' --LabApp.password='' --notebook-dir=src 
+CMD JUPYTER_ENABLE_LAB=yes jupyter lab --port=8888 --no-browser --ip=0.0.0.0 \
+    --LabApp.token='' --LabApp.password='' --notebook-dir=src 
 
 
