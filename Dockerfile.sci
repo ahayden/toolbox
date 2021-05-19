@@ -20,6 +20,6 @@ USER ${container_user}
 ENTRYPOINT ["tini", "--"]
 
 CMD JUPYTER_ENABLE_LAB=yes jupyter lab --port=8888 --no-browser --ip=0.0.0.0 \
-    --LabApp.token='' --LabApp.password='' --notebook-dir=src 
+    --ServerApp.token='' --ServerApp.password='' --notebook-dir=src 
 
 
