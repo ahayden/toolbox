@@ -8,7 +8,7 @@ USER root
 
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         texlive texlive-plain-generic texlive-latex-extra texlive-xetex \ 
-	lmodern librsvg2-bin aspell fonts-freefont-ttf r-base tini \
+	lmodern librsvg2-bin aspell fonts-freefont-ttf tini \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
