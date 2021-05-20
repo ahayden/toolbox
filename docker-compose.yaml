@@ -9,7 +9,6 @@ services:
     extra_hosts:
       - "dev:127.0.0.1"
     restart: unless-stopped
-    network_mode: host
     ports:
       - 2222:22
     volumes:
@@ -24,7 +23,6 @@ services:
       TERM: "xterm-color"
     extra_hosts:
       - "sci:127.0.0.1"
-    network_mode: host
     container_name: sci
     volumes:
       - home-persist:/home/$USER/persist
