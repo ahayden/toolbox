@@ -10,10 +10,12 @@ services:
       - "dev:127.0.0.1"
     restart: unless-stopped
     network_mode: host
+    ports:
+      - 2222:22
     volumes:
       - home-persist:/home/$USER/persist
       - $HOME/src:/home/$USER/src
-    command: /bin/bash -l
+    command: /usr/sbin/sshd
 
   sci:
     image: ghcr.io/ahayden/toolbox:sci

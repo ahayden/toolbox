@@ -26,11 +26,13 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         bash-completion nmap ncat binutils \
 	dnsutils net-tools iputils-ping git \
-        htop openssh-client sudo tmux \
+        htop openssh-client openssh-server sudo tmux \
         neovim socat \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /run/sshd
 
 RUN adduser --disabled-password ${container_user} \
     && usermod -a -G users ${container_user} \
