@@ -8,13 +8,13 @@ services:
       TERM: "xterm-color"
     extra_hosts:
       - "dev:127.0.0.1"
-    restart: unless-stopped
     ports:
       - "2222:22"
+    container_name: dev
     volumes:
       - home-persist:/home/$USER/persist
       - $HOME/src:/home/$USER/src
-    command: /usr/sbin/sshd
+    command: sudo /usr/sbin/sshd -D -e
 
   sci:
     image: ghcr.io/ahayden/toolbox:sci
@@ -25,7 +25,6 @@ services:
       - "sci:127.0.0.1"
     container_name: sci
     volumes:
-      - home-persist:/home/$USER/persist
       - $HOME/src:/home/$USER/src
 
 volumes:
