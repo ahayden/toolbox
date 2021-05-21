@@ -17,6 +17,8 @@ RUN python3 -m pip install sympy scipy numpy matplotlib statsmodels jupyterlab n
 
 USER ${container_user}
 
+RUN julia -e 'using Pkg; pkg"add IJulia SymPy Plots; precompile"'
+
 ENTRYPOINT ["tini", "--"]
 
 CMD JUPYTER_ENABLE_LAB=yes jupyter lab --port=8888 --no-browser --ip=0.0.0.0 \
