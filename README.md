@@ -4,10 +4,10 @@ Multiarch development environments
 
 ## Setup
 
-1. Enable beta GHCR on your GH acct
-2. Fork this repo under your GH user
+1. Enable the beta GitHub Container Registry service on your GitHub acct
+2. Fork this repo under your GitHub user
 3. Clone the repo locally
-4. Edit `docker-compose.yaml` to include registry paths from your GH user
+4. Edit `docker-compose.yaml` to include registry paths from your GitHub user
 5. Run an environment 
     - For the dev shell `docker compose run dev /bin/bash -l`
     - For JupyterLab:
@@ -17,12 +17,14 @@ Multiarch development environments
           2. paste sci.pub into ~/.ssh/authorized_keys
           3. `chmod 0600  ~/.ssh/authorized_keys`
       3. On your local machine create an .ssh/config entry:
+          ```
           Host sci
             HostName localhost
             Port 2222
             LocalForward 8888 sci:8888
-            User <your GH user>
+            User 'your GitHub user'
             IdentityFile ~/.ssh/sci
+          ```
       4. `docker compose up`
       5. `ssh sci`
       6. Open http://localhost:8888 in a browser
