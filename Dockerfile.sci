@@ -13,11 +13,13 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
 
-RUN python3 -m pip install sympy scipy numpy matplotlib statsmodels jupyterlab nodejs
+RUN python3 -m pip install sympy scipy numpy matplotlib statsmodels jupyterlab 
 
 USER ${container_user}
 
 RUN julia -e 'using Pkg; pkg"add IJulia SymPy Plots; precompile"'
+RUN julia -e 'using IJulia; IJulia.installkernel("Julia-multithreaded", env=Dict( "JULIA_NUM_THREADS" => "6",))'
+
 
 ENTRYPOINT ["tini", "--"]
 

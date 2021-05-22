@@ -13,7 +13,6 @@ services:
     container_name: dev
     volumes:
       - home-persist:/home/$USER/persist
-      - $HOME/src:/home/$USER/src
     command: sudo /usr/sbin/sshd -D -e
 
   sci:
@@ -25,7 +24,7 @@ services:
       - "sci:127.0.0.1"
     container_name: sci
     volumes:
-      - $HOME/src:/home/$USER/src
+      - home-persist:/home/$USER/persist
 
 volumes:
   home-persist:
