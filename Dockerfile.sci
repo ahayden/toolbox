@@ -8,7 +8,7 @@ USER root
 
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         texlive texlive-plain-generic texlive-latex-extra texlive-xetex \ 
-	lmodern librsvg2-bin aspell fonts-freefont-ttf tini julia \
+	lmodern librsvg2-bin aspell fonts-freefont-ttf tini julia nodejs \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
@@ -18,8 +18,7 @@ RUN python3 -m pip install sympy scipy numpy matplotlib statsmodels jupyterlab
 USER ${container_user}
 
 RUN julia -e 'using Pkg; pkg"add IJulia SymPy Plots; precompile"'
-RUN julia -e 'using IJulia; IJulia.installkernel("Julia-multithreaded", env=Dict( "JULIA_NUM_THREADS" => "6",))'
-
+RUN julia -e 'using IJulia; IJulia.installkernel("Julia-multithreaded", env=Dict( "JULIA_NUM_THREADS" => "12",))'
 
 ENTRYPOINT ["tini", "--"]
 
