@@ -28,5 +28,6 @@ Multiarch development environments
       4. `docker compose up`
       5. `ssh scidev`
       6. Open http://localhost:8888 in a browser
-6. This will install a julia multithreaded kernel. Assign cores to the container through docker and julia will use what is available up to the limit.
+6. Install a julia multithreaded kernel and assign CPU cores through docker:
+  `using IJulia; IJulia.installkernel("Julia-smp", env=Dict( "JULIA_NUM_THREADS" => "12",))`
 

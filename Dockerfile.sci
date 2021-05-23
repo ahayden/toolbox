@@ -18,7 +18,6 @@ RUN python3 -m pip install sympy scipy numpy matplotlib statsmodels jupyterlab
 USER ${container_user}
 
 RUN julia -e 'using Pkg; pkg"add IJulia SymPy Plots; precompile"'
-RUN julia -e 'using IJulia; IJulia.installkernel("Julia-multithreaded", env=Dict( "JULIA_NUM_THREADS" => "12",))'
 
 ENTRYPOINT ["tini", "--"]
 
