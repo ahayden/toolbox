@@ -17,7 +17,7 @@ RUN python3 -m pip install sympy scipy numpy matplotlib statsmodels jupyterlab
 
 USER ${container_user}
 
-RUN julia -e 'using Pkg; pkg"add IJulia SymPy Plots DifferentialEquations; precompile"'
+RUN julia -e 'using Pkg; pkg"add IJulia DifferentialEquations SymPy Plots"'
 
 ENTRYPOINT ["tini", "--"]
 

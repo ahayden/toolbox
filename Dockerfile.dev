@@ -20,12 +20,14 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 RUN gem install travis --no-document
 
+RUN python3 -m pip install pre-commit
+
 RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin-amd64.deb" \
     && dpkg -i session-manager-plugin-amd64.deb ; exit 0 #ignore error
 
 RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_arm64/session-manager-plugin.deb" -o "session-manager-plugin-arm64.deb" \
     && dpkg -i session-manager-plugin-arm64.deb ; exit 0 #ignore error
-    
+
 # set links to persistent user environment
 RUN su - ${container_user} -c "cd && \
     mkdir -p persist/.ssh && ln -s persist/.ssh . ; \
