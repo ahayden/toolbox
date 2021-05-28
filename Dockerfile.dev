@@ -41,3 +41,5 @@ WORKDIR /home/${container_user}
 USER ${container_user}
 
 RUN echo 'eval `ssh-agent -s`; [ -f ~/.ssh/github ] && ssh-add ~/.ssh/github' > git-init
+
+CMD ["/bin/bash","-l"]

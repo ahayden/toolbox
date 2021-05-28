@@ -42,3 +42,4 @@ RUN adduser --disabled-password ${container_user} \
 
 USER ${container_user}
 
+CMD ["/bin/bash","-l"]
