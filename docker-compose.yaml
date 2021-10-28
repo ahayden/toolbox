@@ -12,8 +12,11 @@ services:
       - "2222:22"
     container_name: dev
     volumes:
+      - ~/src:/home/$USER/src
+      - ~/.config/git:/home/$USER/.config/git
       - home-persist:/home/$USER/persist
     command: sudo /usr/sbin/sshd -D -e
+# or, `docker compose run dev bash`
 
   sci:
     image: ghcr.io/ahayden/toolbox:sci
@@ -24,6 +27,8 @@ services:
       - "sci:127.0.0.1"
     container_name: sci
     volumes:
+      - ~/src:/home/$USER/src
+      - ~/.config/git:/home/$USER/.config/git
       - home-persist:/home/$USER/persist
 
 volumes:
