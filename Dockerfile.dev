@@ -39,6 +39,7 @@ WORKDIR /home/${container_user}
 
 USER ${container_user}
 
-RUN echo 'eval `ssh-agent -s`; [ -f ~/.ssh/github ] && ssh-add ~/.ssh/github' >> .bashrc
+RUN echo 'eval `ssh-agent -s`; [ -f ~/.ssh/github ] && ssh-add ~/.ssh/github' >> .bashrc ; \
+    echo 'export GPG_TTY=$(tty)' >> .bashrc
 
 CMD ["/bin/bash","-l"]
