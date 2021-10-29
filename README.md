@@ -30,4 +30,11 @@ Multiarch development environments
       6. Open http://localhost:8888 in a browser
 6. Install a julia multithreaded kernel and assign CPU cores through docker:
   `using IJulia; IJulia.installkernel("Julia-smp", env=Dict( "JULIA_NUM_THREADS" => "12",))`
-
+7. This allows for multiple GPG keys per container volume. The git config,
+   `~/.config/git/config` is common between the host and container, but
+   `~/.config/git.signingkey` can reference different subkeys.
+    - Add the following include statement in the global git config:
+```
+[include]
+path = ~/.config/git.signingkey
+```
