@@ -8,13 +8,13 @@ USER root
 
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         texlive texlive-plain-generic texlive-latex-extra texlive-xetex \ 
-	lmodern librsvg2-bin aspell fonts-freefont-ttf tini julia nodejs \
+        lmodern librsvg2-bin aspell fonts-freefont-ttf tini julia nodejs \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install sympy scipy numpy astropy matplotlib statsmodels \ 
-        jupyterlab 
+        jupyterlab scikit-learn scikit-image mahotas ipympl
 
 USER ${container_user}
 
