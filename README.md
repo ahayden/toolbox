@@ -11,7 +11,7 @@ Multiarch development environments
 5. Run an environment 
     - For the dev shell `docker compose run dev /bin/bash -l`
     - For JupyterLab:
-      1. Generate ssh keypair: `ssh-keygen -t rsa -b 4096 -f ~/.ssh/scidev`
+      1. Generate ssh keypair: `ssh-keygen -t ed5519 -f ~/.ssh/scidev`
       2. Copy the public component to the container persistent storage:
           1. `docker compose run dev /bin/bash -l` 
           2. paste scidev.pub into ~/.ssh/authorized_keys
