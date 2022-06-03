@@ -7,7 +7,7 @@ RUN test -n "${container_user}"
 USER root
 
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
-        tini julia nodejs python3-numpy \
+        tini julia nodejs python3-numpy r-cran-irkernel \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
