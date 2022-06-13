@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM ubuntu:focal
 
 LABEL about.license="SPDX:Apache-2.0"
 
