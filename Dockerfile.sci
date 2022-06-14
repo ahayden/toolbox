@@ -6,6 +6,8 @@ RUN test -n "${container_user}"
 
 USER root
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         tini julia nodejs python3-numpy r-cran-irkernel \
     && apt-get -y autoclean \
