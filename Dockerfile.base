@@ -12,7 +12,7 @@ WORKDIR /tmp
 # Enable shell pipefail option
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ARG DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC
 
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 	curl \
