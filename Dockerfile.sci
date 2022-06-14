@@ -9,7 +9,7 @@ USER root
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
-        tini julia nodejs python3-numpy r-cran-irkernel \
+        tini julia nodejs r-cran-irkernel \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
@@ -19,7 +19,7 @@ RUN python3 -m pip install sympy scipy numpy astropy matplotlib statsmodels \
 
 USER ${container_user}
 
-RUN julia -e 'using Pkg; pkg"add IJulia DifferentialEquations SymPy Plots HDF5"'
+RUN julia -e 'using Pkg; pkg"add IJulia Pluto DifferentialEquations SymPy Plots HDF5"'
 
 ENTRYPOINT ["tini", "--"]
 
