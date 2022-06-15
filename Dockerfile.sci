@@ -19,7 +19,10 @@ RUN python3 -m pip install sympy scipy numpy astropy matplotlib statsmodels \
 
 USER ${container_user}
 
-RUN julia -e 'using Pkg; Pkg.add("IJulia"); Pkg.add("Pluto"); Pkg.add("DifferentialEquations"); Pkg.add("SymPy")'
+RUN julia -e 'using Pkg; Pkg.add("IJulia")'
+RUN julia -e 'using Pkg; Pkg.add("Pluto")'
+RUN julia -e 'using Pkg; Pkg.add("DifferentialEquations")'
+RUN julia -e 'using Pkg; Pkg.add("SymPy")'
 
 ENTRYPOINT ["tini", "--"]
 
