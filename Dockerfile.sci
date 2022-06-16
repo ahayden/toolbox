@@ -19,7 +19,7 @@ RUN python3 -m pip install sympy scipy numpy astropy matplotlib statsmodels \
 
 USER ${container_user}
 
-RUN julia -e 'using Pkg; Pkg.add("add IJulia")'; exit 0
+RUN julia -e 'using Pkg; Pkg.add("IJulia Pluto")'; exit 0
 
 ENTRYPOINT ["tini", "--"]
 
