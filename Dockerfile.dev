@@ -22,9 +22,10 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 RUN python3 -m pip install pre-commit
 
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-    && unzip awscliv2.zip \
-    && ./aws/install ; exit 0 #ignore error
+# TODO: handle architecture installation properly
+#RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+#    && unzip awscliv2.zip \
+#    && ./aws/install ; exit 0 #ignore error
 
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \ 
