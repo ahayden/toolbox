@@ -1,6 +1,22 @@
 version: "3.8"
 
 services:
+  base:
+    image: ghcr.io/ahayden/toolbox:base
+    hostname: base
+    environment:
+      TERM: "xterm-color"
+    extra_hosts:
+      - "dev:127.0.0.1"
+    ports:
+      - "2222:22"
+    container_name: base
+    volumes:
+      - ~/src:/home/$USER/src
+      - ~/.config/git:/home/$USER/.config/git
+      - ~/.vimrc:/home/$USER/.vimrc
+      - home-persist:/home/$USER/persist
+
   dev:
     image: ghcr.io/ahayden/toolbox:dev
     hostname: dev

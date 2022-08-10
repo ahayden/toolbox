@@ -26,7 +26,7 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 # Install the tools that I need in all my environments
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
-  bash-completion nmap ncat binutils \
+  bash-completion nmap ncat binutils less \
 	dnsutils net-tools iputils-ping git \
   htop openssh-client openssh-server sudo tmux \
   vim socat \
