@@ -31,7 +31,7 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
 
 RUN mkdir -p /run/sshd
 
-RUN adduser --disabled-password ${container_user} \
+RUN adduser --gecos "" --disabled-password ${container_user} \
     && usermod -a -G users ${container_user} \
     && usermod -a -G sudo ${container_user} \
     && echo "${container_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${container_user} \
