@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   base:
-    image: ghcr.io/ahayden/toolbox:base
+    image: ghcr.io/${USER}/toolbox:base
     hostname: base
     environment:
       TERM: "xterm-color"
@@ -12,13 +12,13 @@ services:
       - "2222:22"
     container_name: base
     volumes:
-      - ~/src:/home/$USER/src
-      - ~/.config/git:/home/$USER/.config/git
-      - ~/.vimrc:/home/$USER/.vimrc
-      - home-persist:/home/$USER/persist
+      - ~/src:/home/${USER}/src
+      - ~/.config/git:/home/${USER}/.config/git
+      - ~/.vimrc:/home/${USER}/.vimrc
+      - home-persist:/home/${USER}/persist
 
   dev:
-    image: ghcr.io/ahayden/toolbox:dev
+    image: ghcr.io/${USER}/toolbox:dev
     hostname: dev
     environment:
       TERM: "xterm-color"
@@ -28,15 +28,15 @@ services:
       - "2222:22"
     container_name: dev
     volumes:
-      - ~/src:/home/$USER/src
-      - ~/.config/git:/home/$USER/.config/git
-      - ~/.vimrc:/home/$USER/.vimrc
-      - home-persist:/home/$USER/persist
+      - ~/src:/home/${USER}/src
+      - ~/.config/git:/home/${USER}/.config/git
+      - ~/.vimrc:/home/${USER}/.vimrc
+      - home-persist:/home/${USER}/persist
     command: sudo /usr/sbin/sshd -D -e
 # or, `docker compose run dev bash`
 
   sci:
-    image: ghcr.io/ahayden/toolbox:sci
+    image: ghcr.io/${USER}/toolbox:sci
     hostname: sci
     environment:
       TERM: "xterm-color"
@@ -44,10 +44,10 @@ services:
       - "sci:127.0.0.1"
     container_name: sci
     volumes:
-      - ~/src:/home/$USER/src
-      - ~/.config/git:/home/$USER/.config/git
-      - ~/.vimrc:/home/$USER/.vimrc
-      - home-persist:/home/$USER/persist
+      - ~/src:/home/${USER}/src
+      - ~/.config/git:/home/${USER}/.config/git
+      - ~/.vimrc:/home/${USER}/.vimrc
+      - home-persist:/home/${USER}/persist
 
 volumes:
   home-persist:
