@@ -9,7 +9,7 @@ USER root
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
-        tini julia nodejs r-cran-irkernel \
+        tini nodejs r-cran-irkernel \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
@@ -18,8 +18,6 @@ RUN python3 -m pip install sympy scipy numpy astropy matplotlib statsmodels \
         jupyterlab scikit-learn scikit-image mahotas ipympl
 
 USER ${container_user}
-
-RUN julia -e 'using Pkg; Pkg.add("IJulia Pluto")'; exit 0
 
 ENTRYPOINT ["tini", "--"]
 
