@@ -37,6 +37,8 @@ RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubunt
 #RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_arm64/session-manager-plugin.deb" -o "session-manager-plugin-arm64.deb" \
 #    && dpkg -i session-manager-plugin-arm64.deb ; exit 0 #ignore error
 
+RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && apt-get install -y nodejs
+
 RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         texlive texlive-latex-extra texlive-science \
         texlive-xetex lmodern librsvg2-bin aspell fonts-freefont-ttf \
